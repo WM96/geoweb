@@ -1,0 +1,103 @@
+<html lang="es">
+    <head>
+    <title>Leaflet básico</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="author" content="autor"/>
+      <meta name="description" content="descripción página">
+      <meta name="robots" content="index,follow">
+
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+      <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+
+      <script>
+
+        // COMENTARIOS
+        /*
+
+        COMENTARIOS
+        COMENTARIOS
+
+        */
+
+            var map,capa1;
+            function init(){
+                map = L.map("map",{
+                center:[42, 2.8],
+                zoom:10,
+                zoomControl: false
+                });
+                capa1= L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                maxZoom : 19,
+                minZoom : 1,
+                attribution : "OpenStreetMaps"
+                });
+                capa1.addTo(map);
+
+                L.marker([41.3954, 2.16859]).addTo(map)
+                .bindPopup('Hola punto')
+                .openPopup();
+
+                /*
+
+o podriamos hacer:
+            var marker = L.marker([41.3954, 2.16859]).addTo(map)
+                marker.addTo(map)
+                marker.bindPopup('Hola punto')
+                marker.openPopup();
+
+                opacity: 1 ?????????
+
+                */
+
+                map.on('click',function(e){
+                new L.circleMarker(e.latlng, {
+                color: '#ffffff',
+                fillColor: '#00ff00',
+                fillOpacity: 0.9,
+                radius: 8
+                }).addTo(map)
+                .bindPopup((e.latlng.lat).toFixed(4)+","+ (e.latlng.lng).toFixed(4))
+                .openPopup();
+      });
+
+
+            }
+            </script>
+
+
+
+      <style>
+
+          /*
+            COMENTARIOS
+          */
+            body {
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
+            }
+            #map {
+              height: 100%;
+              width: 100%;
+            }
+           </style>
+    
+    </head>
+
+
+
+
+    <body onLoad="init()">
+
+        <!--
+            COMENTARIOS
+        -->
+
+    
+            
+            <div id="map"></div>
+                    
+    </body>
+    </html>
